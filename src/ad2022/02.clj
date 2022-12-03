@@ -58,7 +58,7 @@
 (defn game-result
   [data]
   (->> (map score data)
-       (apply +)))
+       (reduce +)))
 
 (defn part-one
   [data]

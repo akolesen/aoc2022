@@ -24,7 +24,7 @@
   (->> coll
        (sort >)
        (take 3)
-       (apply +)))
+       (reduce +)))
 
 (part-one (sum-calories data))                                  ; 66186
 (part-two (sum-calories data))                                  ; 196804
