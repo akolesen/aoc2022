@@ -31,17 +31,5 @@
       (/ 2)
       (split-at s)))
 
-(defn part-one
-  [data]
-  (->> data
-       (map split-half)
-       (x-sum-prio)))
-
-(defn part-two
-  [data]
-  (->> data
-       (partition 3)
-       (x-sum-prio)))
-
-(part-one data)                         ; 8039
-(part-two data)                         ; 2510
+(->> data (map split-half) (x-sum-prio))                         ; 8039
+(->> data (partition 3) (x-sum-prio))                            ; 2510
