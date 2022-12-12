@@ -32,17 +32,17 @@
          (mapv parse-monkey))))
 
 (defn item-turn
-  [monkey modulus-fn next-fn state item]
-  (let [[new-monkey new-level] (next-fn item modulus-fn)]
+  [monkey modulus-fn next-fn state level]
+  (let [[new-monkey new-level] (next-fn level modulus-fn)]
     (-> state
         (update-in [new-monkey :items] #(conj % new-level))
         (update-in [monkey :n] inc))))
 
 (defn monkey-turn
-  [modulus-fn state [monkey {:keys [next-fn]}]]
-  (let [item-turn-fn (partial item-turn monkey modulus-fn next-fn)
-        new-state    (reduce item-turn-fn state (get-in state [monkey :items]))]
-    (assoc-in new-state [monkey :items] [])))
+  [modulus-fn state [monkey-idx {:keys [next-fn]}]]
+  (let [item-turn-fn (partial item-turn monkey-idx modulus-fn next-fn)
+        new-state    (reduce item-turn-fn state (get-in state [monkey-idx :items]))]
+    (assoc-in new-state [monkey-idx :items] [])))
 
 (defn play-round
   [modulus-fn state]
